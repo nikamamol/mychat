@@ -11,7 +11,7 @@ function App() {
     <div className="app-container">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/chat" element={<Chat />} />
         </Routes>
