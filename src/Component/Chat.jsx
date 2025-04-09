@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import './Chat.css';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://mychatbackend-di7n.onrender.com/');
 
 function Chat() {
     const [message, setMessage] = useState('');
@@ -15,7 +15,7 @@ function Chat() {
         if (!username) {
             return;
         }
-
+console.log(setUsername)
         socket.emit('setUsername', username);
 
         if ('Notification' in window) {
