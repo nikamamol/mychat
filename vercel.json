@@ -5,7 +5,7 @@
         "use": "@vercel/react"
     }],
     "routes": [{
-        "src": "/(.*)",
-        "dest": "/index.html"
+        "src": "(.*)",
+        "dest": "index.html"
     }]
 }
