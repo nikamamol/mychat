@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import './Chat.css';
 
-const socket = io('https://mychatbackend-di7n.onrender.com/');
+const socket = io('https://mychatbackend-7.onrender.com');
 
 function Chat() {
     const [message, setMessage] = useState('');

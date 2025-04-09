@@ -14,7 +14,7 @@ function Register() {
         setError(''); // Clear previous errors
 
         try {
-            const response = await axios.post('https://mychatbackend-di7n.onrender.com/register', {
+            const response = await axios.post('https://mychatbackend-7.onrender.com/register', {
                 username,
                 password,
             });

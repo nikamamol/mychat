@@ -14,7 +14,7 @@ function Login() {
         setError('');
 
         try {
-            const response = await axios.post('https://mychatbackend-di7n.onrender.com/login', {
+            const response = await axios.post('https://mychatbackend-7.onrender.com/login', {
                 username,
                 password,
             });
