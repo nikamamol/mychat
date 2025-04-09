@@ -105,16 +105,42 @@ console.log(setUsername)
         <div className="chat-wrapper">
             <h1 className="chat-title">ChatSphere</h1>
             <div className="chat-box">
-                {messages.map((msg, index) => (
-                    <div key={index} className="message">
-                        <p style={{fontSize:"10px", marginBottom:"10px", background:"#A0C878",color:"black", padding:"5px", borderRadius:"10px",width:"80%",marginLeft:"-10px"}}>{msg.username || 'Anonymous'}</p> 
-                        <p>{msg.content || 'No content'}{' '}</p>
-                  
-                        <p style={{ color: 'black', fontSize: '10px', marginTop:"10px", justifyContent:"end",display:"flex" }}>
-                            ({formatTimestamp(msg.timestamp)})
-                        </p>
-                    </div>
-                ))}
+            {messages.map((msg, index) => {
+    const isMyMessage = msg.username === username;
+
+    return (
+        <div
+            key={index}
+            className="message"
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: isMyMessage ? 'flex-end' : 'flex-start',
+                marginBottom: '10px'
+            }}
+        >
+            <div
+                style={{
+                    background: isMyMessage ? '#DCF8C6' : '#FFFFFF',
+                    color: 'black',
+                    padding: '10px',
+                    borderRadius: '10px',
+                    maxWidth: '70%',
+                    wordWrap: 'break-word',
+                    boxShadow: '0px 1px 2px rgba(0,0,0,0.2)'
+                }}
+            >
+                <p style={{ fontSize: '10px', marginBottom: '5px', fontWeight: 'bold' }}>
+                    {msg.username || 'Anonymous'}
+                </p>
+                <p>{msg.content || 'No content'}</p>
+                <p style={{ fontSize: '10px', marginTop: '5px', textAlign: 'right' }}>
+                    {formatTimestamp(msg.timestamp)}
+                </p>
+            </div>
+        </div>
+    );
+})}
             </div>
             <div className="input-container">
                 <input
