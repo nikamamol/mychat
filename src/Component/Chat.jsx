@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import './Chat.css';
+import './Messagecss.css';
 
 const socket = io('https://mychatbackend-7.onrender.com');
 
@@ -9,13 +10,13 @@ function Chat() {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [unreadCount, setUnreadCount] = useState(0);
+    const chatBoxRef = useRef(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!username) {
-            return;
-        }
 console.log(setUsername)
+    useEffect(() => {
+        if (!username) return;
+
         socket.emit('setUsername', username);
 
         if ('Notification' in window) {
@@ -25,21 +26,40 @@ console.log(setUsername)
         }
 
         socket.on('loadMessages', (loadedMessages) => {
-            console.log('Loaded Messages:', loadedMessages); // Debug log
             setMessages(loadedMessages);
         });
 
         socket.on('message', (msg) => {
-            console.log('New Message:', msg); // Debug log
-            setMessages((prev) => [...prev, msg]);
+            setMessages(prev => [...prev, msg]);
+
+            const chatBox = chatBoxRef.current;
+            if (chatBox) {
+                const isNearBottom = chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight < 100;
+                if (isNearBottom) {
+                    setTimeout(() => {
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }, 100);
+                }
+            }
+
             if (document.hidden) {
+                setUnreadCount(prev => prev + 1);
                 showNotification(msg);
             }
         });
 
+        const handleVisibilityChange = () => {
+            if (!document.hidden) {
+                setUnreadCount(0);
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
         return () => {
             socket.off('loadMessages');
             socket.off('message');
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
     }, [username]);
 
@@ -54,17 +74,12 @@ console.log(setUsername)
             });
         }
     };
-    
 
     const formatTimestamp = (timestamp) => {
-        if (!timestamp) {
-            return 'Unknown Time'; // Fallback if timestamp is missing
-        }
+        if (!timestamp) return 'Unknown Time';
 
         const messageDate = new Date(timestamp);
-        if (isNaN(messageDate.getTime())) {
-            return 'Invalid Time'; // Fallback if timestamp is invalid
-        }
+        if (isNaN(messageDate.getTime())) return 'Invalid Time';
 
         const today = new Date();
         const yesterday = new Date();
@@ -86,11 +101,11 @@ console.log(setUsername)
             setMessage('');
         }
     };
+
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
+        if (e.key === 'Enter') sendMessage();
     };
+
     if (!username) {
         return (
             <div className="chat-wrapper">
@@ -108,40 +123,68 @@ console.log(setUsername)
 
     return (
         <div className="chat-wrapper">
-            <h1 className="chat-title">ChatSphere</h1>
-            <div className="chat-box">
-            {messages.map((msg, index) => {
-    const isMyMessage = msg.username === username;
+            <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+                <h1 className="chat-title">ChatSphere</h1>
+                {unreadCount > 0 && (
+                    <div style={{
+                        background: 'red',
+                        color: 'white',
+                        borderRadius: '50%',
+                        padding: '5px 10px',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        marginLeft: '10px'
+                    }}>
+                        {unreadCount}
+                    </div>
+                )}
+            </div>
 
-    return (
-        <div
-            key={index}
-            className="message"
-          
-        >
-            <div
-                style={{
-                    background: isMyMessage ? '#DCF8C6' : '#FFFFFF',
-                    color: 'black',
-                    padding: '10px',
-                    borderRadius: '10px',
-                    maxWidth: '70%',
-                    wordWrap: 'break-word',
-                    boxShadow: '0px 1px 2px rgba(0,0,0,0.2)'
-                }}
-            >
-                <p style={{ fontSize: '10px', marginBottom: '5px', fontWeight: 'bold' }}>
-                    {msg.username || 'Anonymous'}
-                </p>
-                <p>{msg.content || 'No content'}</p>
-                <p style={{ fontSize: '10px', marginTop: '5px', textAlign: 'right' }}>
-                    {formatTimestamp(msg.timestamp)}
-                </p>
+            <div className="chat-box" ref={chatBoxRef}>
+                {messages.map((msg, index) => {
+                    const isMyMessage = msg.username === username;
+
+                    return (
+                        <div
+                            key={index}
+                            className={`message ${isMyMessage ? 'my-message' : 'other-message'}`}
+                        >
+                            <div
+                                style={{
+                                    background: isMyMessage ? '#DCF8C6' : '#FFFFFF',
+                                    color: 'black',
+                                    padding: '10px',
+                                    borderRadius: '10px',
+                                    maxWidth: '70%',
+                                    wordWrap: 'break-word',
+                                    boxShadow: '0px 1px 2px rgba(0,0,0,0.2)',
+                                    textAlign: 'left'
+                                }}
+                            >
+                                <p style={{
+                                    fontSize: '10px',
+                                    marginBottom: '5px',
+                                    fontWeight: 'bold',
+                                    backgroundColor: '#3D90D7',
+                                    padding: '2px 5px',
+                                    borderRadius: '5px'
+                                }}>
+                                    {msg.username || 'Anonymous'}
+                                </p>
+                                <p>{msg.content || 'No content'}</p>
+                                <p style={{
+                                    fontSize: '10px',
+                                    marginTop: '5px',
+                                    textAlign: 'right'
+                                }}>
+                                    {formatTimestamp(msg.timestamp)}
+                                </p>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
-        </div>
-    );
-})}
-            </div>
+
             <div className="input-container">
                 <input
                     type="text"
