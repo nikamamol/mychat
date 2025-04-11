@@ -168,6 +168,7 @@ console.log(setUsername)
                                     marginBottom: '5px',
                                     fontWeight: 'bold',
                                     backgroundColor: '#3D90D7',
+                                    color: 'white',
                                     padding: '2px 5px',
                                     borderRadius: '5px'
                                 }}>
