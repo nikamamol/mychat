@@ -68,12 +68,14 @@ console.log(setUsername)
             const time = message.timestamp
                 ? new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                 : 'Unknown Time';
+    
             new Notification('New Message', {
                 body: `${message.username}: ${message.content} (${time})`,
                 icon: 'https://via.placeholder.com/50',
             });
         }
     };
+    
 
     const formatTimestamp = (timestamp) => {
         if (!timestamp) return 'Unknown Time';
