@@ -112,12 +112,7 @@ console.log(setUsername)
         <div
             key={index}
             className="message"
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: isMyMessage ? 'flex-end' : 'flex-start',
-                marginBottom: '10px'
-            }}
+          
         >
             <div
                 style={{

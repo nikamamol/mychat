@@ -1,214 +1,232 @@
 /* Reset default styles */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
+
 
 /* Main Container */
+
 .app-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
 }
+
 
 /* Auth Wrapper (Login/Register) */
+
 .auth-wrapper {
-  background: #ffffff;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
 }
+
 
 /* Auth Title */
+
 .auth-title {
-  color: #00695c;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  font-weight: bold;
+    color: #00695c;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
+
 
 /* Auth Form */
+
 .auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
+
 /* Auth Input */
+
 .auth-input {
-  padding: 12px;
-  border: 2px solid #00695c;
-  border-radius: 25px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease;
+    padding: 12px;
+    border: 2px solid #00695c;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
 .auth-input:focus {
-  border-color: #004d40;
+    border-color: #004d40;
 }
 
+
 /* Auth Button */
+
 .auth-button {
-  padding: 12px;
-  background: #00695c;
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+    padding: 12px;
+    background: #00695c;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .auth-button:hover {
-  background: #004d40;
-  transform: translateY(-2px);
+    background: #004d40;
+    transform: translateY(-2px);
 }
 
 .auth-button:active {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
+
 /* Auth Link */
+
 .auth-link {
-  margin-top: 15px;
-  color: #555;
+    margin-top: 15px;
+    color: #555;
 }
 
 .auth-link a {
-  color: #00695c;
-  text-decoration: none;
-  font-weight: bold;
+    color: #00695c;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .auth-link a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 
 /* Chat Wrapper */
-.chat-wrapper {
-  background: #ffffff;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
 
+.chat-wrapper {
+    background: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
+
 
 /* Chat Title */
-.chat-title {
-  color: #00695c;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  font-weight: bold;
-  justify-content: center;
-  display: flex;
 
+.chat-title {
+    color: #00695c;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
 }
+
 
 /* Chat Box */
+
 .chat-box {
-  background: #f5f5f5;
-  border-radius: 10px;
-  padding: 15px;
-  height: 400px;
-  overflow-y: auto;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 15px;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 
 /* Individual Message */
-.message {
-  background: #FBF8EF;
-  color: black;
-  padding: 10px 15px;
-  border-radius: 20px;
-  max-width: 90%;
-
-  align-self: flex-start;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
 
 .message:hover {
-  transform: scale(1.02);
+    transform: scale(1.02);
 }
+
 
 /* Input Container */
+
 .input-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.error-message {
-  color: #d32f2f;
-  font-size: 0.9rem;
-  margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
+.error-message {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+
 /* Message Input */
+
 .message-input {
-  flex: 1;
-  max-width: 400px;
-  padding: 12px;
-  border: 2px solid #00695c;
-  border-radius: 25px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease;
+    flex: 1;
+    max-width: 400px;
+    padding: 12px;
+    border: 2px solid #00695c;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
 .message-input:focus {
-  border-color: #004d40;
+    border-color: #004d40;
 }
 
+
 /* Send Button */
+
 .send-button {
-  padding: 12px 25px;
-  background: #00695c;
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+    padding: 12px 25px;
+    background: #00695c;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .send-button:hover {
-  background: #004d40;
-  transform: translateY(-2px);
+    background: #004d40;
+    transform: translateY(-2px);
 }
 
 .send-button:active {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
+
 /* Scrollbar Styling */
+
 .chat-box::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 .chat-box::-webkit-scrollbar-track {
-  background: #e0e0e0;
-  border-radius: 10px;
+    background: #e0e0e0;
+    border-radius: 10px;
 }
 
 .chat-box::-webkit-scrollbar-thumb {
-  background: #00695c;
-  border-radius: 10px;
+    background: #00695c;
+    border-radius: 10px;
 }
 
 .chat-box::-webkit-scrollbar-thumb:hover {
-  background: #004d40;
+    background: #004d40;
 }
