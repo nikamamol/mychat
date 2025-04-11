@@ -54,6 +54,7 @@ console.log(setUsername)
             });
         }
     };
+    
 
     const formatTimestamp = (timestamp) => {
         if (!timestamp) {
@@ -85,7 +86,11 @@ console.log(setUsername)
             setMessage('');
         }
     };
-
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    };
     if (!username) {
         return (
             <div className="chat-wrapper">
@@ -144,6 +149,7 @@ console.log(setUsername)
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type your message..."
                     className="message-input"
+                    onKeyDown={handleKeyDown}
                 />
                 <button onClick={sendMessage} className="send-button">Send</button>
             </div>
